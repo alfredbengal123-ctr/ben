@@ -1,0 +1,11 @@
+[tomcat_servers]
+tomcat1 ansible_host=10.0.0.11
+tomcat2 ansible_host=10.0.0.12
+tomcat3 ansible_host=10.0.0.13
+tomcat4 ansible_host=10.0.0.14
+tomcat5 ansible_host=10.0.0.15
+tomcat6 ansible_host=10.0.0.16
+tomcat7 ansible_host=10.0.0.17
+tomcat8 ansible_host=10.0.0.18
+tomcat9 ansible_host=10.0.0.19
+tomcat10 ansible_host=10.0.0.20

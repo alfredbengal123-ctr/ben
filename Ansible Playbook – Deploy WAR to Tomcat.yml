@@ -1,0 +1,38 @@
+---
+- name: Deploy application to Tomcat servers
+  hosts: tomcat_servers
+  become: yes
+
+  vars:
+    tomcat_service: tomcat
+    tomcat_webapps: /opt/tomcat/webapps
+    app_name: myapp
+
+  tasks:
+    - name: Stop Tomcat
+      service:
+        name: "{{ tomcat_service }}"
+        state: stopped
+
+    - name: Remove old application
+      file:
+        path: "{{ tomcat_webapps }}/{{ app_name }}"
+        state: absent
+
+    - name: Remove old WAR file
+      file:
+        path: "{{ tomcat_webapps }}/{{ app_name }}.war"
+        state: absent
+
+    - name: Copy new WAR file
+      copy:
+        src: files/{{ app_name }}.war
+        dest: "{{ tomcat_webapps }}/{{ app_name }}.war"
+        owner: tomcat
+        group: tomcat
+        mode: '0644'
+
+    - name: Start Tomcat
+      service:
+        name: "{{ tomcat_service }}"
+        state: started
